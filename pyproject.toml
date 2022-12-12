@@ -8,6 +8,9 @@ packages = [{include = "city_bike_app"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+flask = "^2.2.2"
+psycopg2-binary = "^2.9.5"
+flask-sqlalchemy = "^3.0.2"
 
 
 [build-system]
