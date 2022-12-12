@@ -1,0 +1,8 @@
+import os
+
+TESTING = True
+DEBUG = True
+FLASK_ENV = 'development'
+
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+SQLALCHEMY_TRACK_MODIFICATIONS = False
