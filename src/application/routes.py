@@ -1,6 +1,6 @@
-from flask import Markup, request, make_response
+from flask import request, make_response
 from flask import current_app as app
-from .models import db, Station
+from .models.station import db, Station
 
 @app.route('/', methods=['GET'])
 def stations():
@@ -8,7 +8,7 @@ def stations():
     name = request.args.get('name')
     if name:
         new_station = Station(
-            fi_name=name
+            name_fi=name
         )
         db.session.add(new_station)  # Adds new User record to database
         db.session.commit()  # Commits all changes
