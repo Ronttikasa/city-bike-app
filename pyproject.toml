@@ -11,6 +11,7 @@ python = "^3.8"
 flask = "^2.2.2"
 psycopg2-binary = "^2.9.5"
 flask-sqlalchemy = "^3.0.2"
+pandas = "^1.5.2"
 
 
 [build-system]
