@@ -10,16 +10,16 @@ class Journey(db.Model):
 
     departure_station = db.Column(
         db.Integer,
+        db.ForeignKey('stations.station_id'),
         unique=False,
-        nullable=False,
-        foreign_key=('stations.station_id')
+        nullable=False
     )
 
     return_station = db.Column(
         db.Integer,
+        db.ForeignKey('stations.station_id'),
         unique=False,
-        nullable=False,
-        foreign_key=('stations.station_id')
+        nullable=False
     )
 
     departure_time = db.Column(

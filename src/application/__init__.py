@@ -3,6 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+from .models.station import Station
+from .models.journey import Journey
+
 def init_app():
     """Initialize the application"""
     app = Flask(__name__)
