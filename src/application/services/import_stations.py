@@ -8,11 +8,14 @@ data_file_path = os.path.join(dirname, "..", "..", "..", "data", "Helsingin_ja_E
 def import_stations():
     df = pd.read_csv(data_file_path)
 
-    df.to_sql(
-        "stations",
-        db.engine, 
-        index=False, 
-        if_exists="replace")
+    if not df.empty:
+        df.to_sql(
+            "stations",
+            db.engine, 
+            index=False, 
+            if_exists="replace")
 
-    sql = """ ALTER TABLE stations ADD PRIMARY KEY ("FID") """
-    db.session.execute(sql)
+        sql = """ ALTER TABLE stations ADD PRIMARY KEY ("FID") """
+        db.session.execute(sql)
+        return True
+    return False
