@@ -8,12 +8,15 @@ class JourneyService:
         self.repo = repository
 
     def import_journeys(self, filename):
+        """Import journey data from csv file"""
         dirname = os.path.dirname(__file__)
         data_file_path = os.path.join(dirname, "..", "..", "..", "data", filename)
         df = pd.read_csv(data_file_path)
 
         if not df.empty:
-            df.rename(columns={"Covered distance (m)": "Distance", "Duration (sec.)": "Duration"}, inplace=True)
+            df.rename(
+                columns={"Covered distance (m)": "Distance", "Duration (sec.)": "Duration"},
+                inplace=True)
             df.drop(columns=["Departure station name", "Return station name"], inplace=True)
 
             index_filter = df[(df["Distance"] < 10) | (df["Duration"] < 10)].index
@@ -29,6 +32,7 @@ class JourneyService:
         return False
 
     def show_journeys(self):
+        """Return the journeys in database"""
         return self.repo.get_journeys()
 
 journey_service = JourneyService()

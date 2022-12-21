@@ -11,3 +11,4 @@ class TestJourneyService(unittest.TestCase):
         self.repo.get_journeys.return_value = {}
         result = self.svc.show_journeys()
         self.assertEqual(result, {})
+        

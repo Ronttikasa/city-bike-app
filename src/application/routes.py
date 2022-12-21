@@ -1,6 +1,5 @@
 from flask import request, make_response, render_template
 from flask import current_app as app
-from . import db
 from .services.import_stations import import_stations
 from .services.journey_service import journey_service
 from .repositories.city_bike_repository import citybike_repo
@@ -22,4 +21,3 @@ def add_journeys():
 def journeys():
     journeys = journey_service.show_journeys()
     return render_template("journeys.html", journeys=journeys)
-
