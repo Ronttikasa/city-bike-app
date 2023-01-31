@@ -1,3 +1,4 @@
+<h1>City bike stations</h1>
 {% for station in stations %}
-{{ station.Nimi }} {{ station.Osoite }} <br />
+<a href="/station/{{ station.ID }}"> {{station.Nimi }} </a> {{ station.Osoite }} <br />
 {% endfor %}

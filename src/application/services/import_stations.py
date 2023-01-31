@@ -7,7 +7,8 @@ data_file_path = os.path.join(dirname, "..", "..", "..", "data",
     "Helsingin_ja_Espoon_kaupunkipyöräasemat_avoin.csv")
 
 def import_stations():
-    """Import station data from csv file"""
+    """Import station data from csv file.
+    """
     df = pd.read_csv(data_file_path)
 
     if not df.empty:
