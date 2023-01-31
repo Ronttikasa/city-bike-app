@@ -24,4 +24,5 @@ def journeys():
 
 @app.route("/station/<int:id>", methods=["GET"])
 def station(id):
-    return render_template("station.html")
+    station = journey_service.get_station_data(id)
+    return render_template("station.html", station=station)

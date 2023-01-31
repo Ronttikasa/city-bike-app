@@ -32,7 +32,17 @@ class JourneyService:
         return False
 
     def show_journeys(self):
-        """Return the journeys in database"""
+        """Return the journeys in database.
+        """
         return self.repo.get_journeys()
+
+    def get_station_data(self, station_id):
+        """Fetch station data.
+
+        Returns:
+           Object with station data 
+        """
+        
+        return self.repo.get_station_data(station_id)
 
 journey_service = JourneyService()
