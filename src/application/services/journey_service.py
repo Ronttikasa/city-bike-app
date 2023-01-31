@@ -47,6 +47,8 @@ class JourneyService:
         result["station"] = self.repo.get_station_info(station_id)
         result["departures"] = self.repo.get_number_of_departing_journeys(station_id)
         result["returns"] = self.repo.get_number_of_returning_journeys(station_id)
+        result["top5_return_stations"] = self.repo.get_top_return_stations(station_id)
+        result["top5_departure_stations"] = self.repo.get_top_departure_stations(station_id)
 
         return result
 

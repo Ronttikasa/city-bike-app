@@ -59,4 +59,34 @@ class CityBikeRepository:
             """
         return self.db.session.execute(sql, {"id": station_id}).fetchone()
 
+    def get_top_return_stations(self, station_id):
+        """Fetch top 5 return stations from given station.
+        """
+        sql = """SELECT s."Nimi", j."Return station id" AS return_station_id, s1."Nimi" AS return_station, count(j."Return station id")
+            FROM stations AS s
+            JOIN journeys AS j ON s."ID"=j."Departure station id"
+            JOIN stations AS s1 ON j."Return station id"=s1."ID"
+            WHERE s."ID"=:id
+            GROUP BY s."Nimi", j."Return station id", s1."Nimi"
+            ORDER BY count DESC
+            LIMIT 5
+            """
+        return self.db.session.execute(sql, {"id": station_id}).fetchall()
+
+    def get_top_departure_stations(self, station_id):
+        """Fetch top 5 departure stations to given station.
+        """
+        sql = """SELECT s."Nimi", j."Departure station id" AS departure_station_id, s1."Nimi" AS departure_station, count(j."Departure station id")
+            FROM stations AS s
+            JOIN journeys AS j ON s."ID"=j."Return station id"
+            JOIN stations AS s1 ON j."Departure station id"=s1."ID"
+            WHERE s."ID"=:id
+            GROUP BY s."Nimi", j."Departure station id", s1."Nimi"
+            ORDER BY count DESC
+            LIMIT 5
+            """
+        return self.db.session.execute(sql, {"id": station_id}).fetchall()
+
+
+
 citybike_repo = CityBikeRepository()

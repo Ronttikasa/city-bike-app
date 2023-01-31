@@ -3,10 +3,24 @@
 <p>{{ station.Osoite }}, {{ station.Kaupunki }}</p>
 
 <p>
-Departures from station: {{ departures.count }}<br />
-Returns to station: {{ returns.count }}
+    <h2>Departing journeys</h2>
+    <b>Departures from station:</b> {{ departures.count }}<br>
+    <b>Average distance of a departing journey:</b> {{ "%.2f"|format(departures.avg/1000) }} km<br>
+    <b>Top 5 return stations:</b>
+    <ul>
+    {% for return_station in top5_return_stations %}
+    <li><a href="/station/{{ return_station.return_station_id }}">{{ return_station.return_station }}</a></li>
+    {% endfor %}
+    </ul>
 </p>
 <p>
-Average distance of a departing journey: {{ "%.2f"|format(departures.avg/1000) }} km<br />
-Average distance of a returning journey: {{ "%.2f"|format(returns.avg/1000) }} km
+    <h2>Returning journeys</h2>
+    <b>Returns to station:</b> {{ returns.count }}<br>
+    <b>Average distance of a returning journey:</b> {{ "%.2f"|format(returns.avg/1000) }} km<br>
+    <b>Top 5 departure stations:</b>
+    <ul>
+    {% for departure_station in top5_departure_stations %}
+    <li><a href="/station/{{ departure_station.departure_station_id }}">{{ departure_station.departure_station }}</a></li>
+    {% endfor %}
+    </ul>
 </p>
