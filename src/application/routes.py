@@ -25,4 +25,4 @@ def journeys():
 @app.route("/station/<int:id>", methods=["GET"])
 def station(id):
     station = journey_service.get_station_data(id)
-    return render_template("station.html", station=station)
+    return render_template("station.html", **station)

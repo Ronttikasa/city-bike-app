@@ -40,7 +40,7 @@ class CityBikeRepository:
     def get_number_of_departing_journeys(self, station_id):
         """Count total number of journeys departing from the station
         """
-        sql = """SELECT s."Nimi", COUNT(*)
+        sql = """SELECT s."Nimi", COUNT(*), AVG(j."Distance")
             FROM stations AS s
             JOIN journeys AS j ON s."ID" = j."Departure station id"
             WHERE s."ID"=:id
@@ -51,7 +51,7 @@ class CityBikeRepository:
     def get_number_of_returning_journeys(self, station_id):
         """Count total number of journeys returning to the station
         """
-        sql = """SELECT s."Nimi", COUNT(*)
+        sql = """SELECT s."Nimi", COUNT(*), AVG(j."Distance")
             FROM stations AS s
             JOIN journeys AS j ON s."ID" = j."Return station id"
             WHERE s."ID"=:id

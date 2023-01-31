@@ -1,6 +1,12 @@
-<h1>{{ station.station.Nimi }}</h1>
+<h1>{{ station.Nimi }}</h1>
 
-<p>{{ station.station.Osoite }}, {{ station.station.Kaupunki }}</p>
+<p>{{ station.Osoite }}, {{ station.Kaupunki }}</p>
 
-Departures from station: {{ station.departures.count }}<br />
-Returns to station: {{ station.returns.count }}
+<p>
+Departures from station: {{ departures.count }}<br />
+Returns to station: {{ returns.count }}
+</p>
+<p>
+Average distance of a departing journey: {{ "%.2f"|format(departures.avg/1000) }} km<br />
+Average distance of a returning journey: {{ "%.2f"|format(returns.avg/1000) }} km
+</p>
