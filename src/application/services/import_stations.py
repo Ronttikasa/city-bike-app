@@ -10,6 +10,7 @@ def import_stations():
     """Import station data from csv file.
     """
     df = pd.read_csv(data_file_path)
+    df.loc[df["Kaupunki"] == " ", "Kaupunki"] = "Helsinki"
 
     if not df.empty:
         df.to_sql(
