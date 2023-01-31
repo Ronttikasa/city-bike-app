@@ -30,11 +30,33 @@ class CityBikeRepository:
             """
         return self.db.session.execute(sql).fetchall()
 
-    def get_station_data(self, station_id):
+    def get_station_info(self, station_id):
         """Fetch data for a single station view.
         """
 
         sql = """SELECT "FID", "ID", "Nimi", "Osoite", "Kaupunki" FROM stations WHERE "ID"=:id"""
+        return self.db.session.execute(sql, {"id": station_id}).fetchone()
+
+    def get_number_of_departing_journeys(self, station_id):
+        """Count total number of journeys departing from the station
+        """
+        sql = """SELECT s."Nimi", COUNT(*)
+            FROM stations AS s
+            JOIN journeys AS j ON s."ID" = j."Departure station id"
+            WHERE s."ID"=:id
+            GROUP BY s."Nimi"
+            """
+        return self.db.session.execute(sql, {"id": station_id}).fetchone()
+
+    def get_number_of_returning_journeys(self, station_id):
+        """Count total number of journeys returning to the station
+        """
+        sql = """SELECT s."Nimi", COUNT(*)
+            FROM stations AS s
+            JOIN journeys AS j ON s."ID" = j."Return station id"
+            WHERE s."ID"=:id
+            GROUP BY s."Nimi"
+            """
         return self.db.session.execute(sql, {"id": station_id}).fetchone()
 
 citybike_repo = CityBikeRepository()

@@ -42,7 +42,13 @@ class JourneyService:
         Returns:
            Object with station data 
         """
-        
-        return self.repo.get_station_data(station_id)
+
+        result = {}
+        result["station"] = self.repo.get_station_info(station_id)
+        result["departures"] = self.repo.get_number_of_departing_journeys(station_id)
+        result["returns"] = self.repo.get_number_of_returning_journeys(station_id)
+
+        return result
+
 
 journey_service = JourneyService()

@@ -1,3 +1,6 @@
-<h1>{{ station.Nimi }}</h1>
+<h1>{{ station.station.Nimi }}</h1>
 
-{{ station. Osoite }}, {{ station. Kaupunki }}
+<p>{{ station.station.Osoite }}, {{ station.station.Kaupunki }}</p>
+
+Departures from station: {{ station.departures.count }}<br />
+Returns to station: {{ station.returns.count }}
