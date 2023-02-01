@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>City Bikes</title>
-</head>
-<body>
-    <h1>City bike journeys</h1>
-    {% for journey in journeys %}
-        <a href="/station/{{ journey.departure_id }}"">{{ journey.departure_station }}</a> 
-        to <a href="/station/{{ journey.return_id }}">{{ journey.return_station }}</a>, 
-        {{ "%.2f"|format(journey.Distance/1000) }} km in {{  "%.0f"|format(journey.Duration/60) }} minutes <br />
-    {% endfor %}
-
-</body>
-</html>
+{% extends "layout.html" %}
+{% block content %}
+<h1>City bike journeys</h1>
+{% for journey in journeys %}
+    <a href="/station/{{ journey.departure_id }}"">{{ journey.departure_station }}</a> 
+    to <a href="/station/{{ journey.return_id }}">{{ journey.return_station }}</a>, 
+    {{ "%.2f"|format(journey.Distance/1000) }} km in {{  "%.0f"|format(journey.Duration/60) }} minutes <br />
+{% endfor %}
+{% endblock %}
