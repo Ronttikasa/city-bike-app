@@ -31,10 +31,17 @@ class JourneyService:
             return True
         return False
 
-    def show_journeys(self):
-        """Return the journeys in database.
+    def show_journeys(self, limit, offset):
+        """Fetch the journeys from database.
+
+        Args:
+            limit (int): Number of journeys to show
+            offset (int): Offset from start of db table
+
+        Returns:
+            A list of objects containing the journey data
         """
-        return self.repo.get_journeys()
+        return self.repo.get_journeys(limit, offset)
 
     def get_station_data(self, station_id):
         """Fetch station data.

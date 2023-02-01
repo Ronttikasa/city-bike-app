@@ -1,9 +1,18 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>City bike journeys</h1>
-{% for journey in journeys %}
-    <a href="/station/{{ journey.departure_id }}"">{{ journey.departure_station }}</a> 
-    to <a href="/station/{{ journey.return_id }}">{{ journey.return_station }}</a>, 
-    {{ "%.2f"|format(journey.Distance/1000) }} km in {{  "%.0f"|format(journey.Duration/60) }} minutes <br />
-{% endfor %}
+    <h1>City bike journeys</h1>
+    <p>
+    {% for journey in journeys %}
+        <a href="/station/{{ journey.departure_id }}"">{{ journey.departure_station }}</a> 
+        to <a href="/station/{{ journey.return_id }}">{{ journey.return_station }}</a>, 
+        {{ "%.2f"|format(journey.Distance/1000) }} km in {{  "%.0f"|format(journey.Duration/60) }} minutes <br />
+    {% endfor %}
+    </p>
+    <p>
+    {% if page == 1 %}
+        1 <a href="/journeys?page=2">next page</a>
+    {% else %}
+        <a href="/journeys?page={{ page - 1 }}">previous page</a> {{ page }} <a href="/journeys?page={{ page + 1 }}">next page</a>
+    {% endif %}
+    </p>
 {% endblock %}

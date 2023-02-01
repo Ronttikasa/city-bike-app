@@ -15,7 +15,7 @@ class CityBikeRepository:
         sql = """SELECT "FID", "ID", "Nimi", "Osoite", "Kaupunki" FROM stations"""
         return self.db.session.execute(sql).fetchall()
 
-    def get_journeys(self):
+    def get_journeys(self, limit, offset):
         """Fetch all journeys in database.
 
         Returns:
@@ -27,9 +27,10 @@ class CityBikeRepository:
             FROM journeys as j
             JOIN stations as s1 ON j."Departure station id"=s1."ID"
             JOIN stations as s2 ON j."Return station id"=s2."ID"
-            LIMIT 10
+            LIMIT :limit
+            OFFSET :offset
             """
-        return self.db.session.execute(sql).fetchall()
+        return self.db.session.execute(sql, {"limit": limit, "offset": offset}).fetchall()
 
     def get_station_info(self, station_id):
         """Fetch data for a single station view.

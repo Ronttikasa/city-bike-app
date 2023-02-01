@@ -1,4 +1,4 @@
-from flask import make_response, render_template, redirect
+from flask import render_template, redirect, request
 from flask import current_app as app
 from .services.import_stations import import_stations
 from .services.journey_service import journey_service
@@ -18,8 +18,11 @@ def add_journeys():
 
 @app.route("/journeys", methods=["GET"])
 def journeys():
-    journeys = journey_service.show_journeys()
-    return render_template("journeys.html", journeys=journeys)
+    page = int(request.args.get("page", 1))
+    journeys_to_show = 50
+    offset = (page - 1) * journeys_to_show
+    journeys = journey_service.show_journeys(journeys_to_show, offset)
+    return render_template("journeys.html", journeys=journeys, page=page)
 
 @app.route("/station/<int:id>", methods=["GET"])
 def station(id):
