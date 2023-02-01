@@ -24,7 +24,7 @@ class CityBikeRepository:
         Returns:
             List of objects with fields FID, ID, Nimi, Osoite, Kaupunki
         """
-        sql = """SELECT "FID", "ID", "Nimi", "Osoite", "Kaupunki" 
+        sql = """SELECT "FID", "ID", "Nimi", "Osoite", "Kaupunki"
             FROM stations
             LIMIT :limit
             OFFSET :offset"""
@@ -83,7 +83,8 @@ class CityBikeRepository:
     def get_top_return_stations(self, station_id):
         """Fetch top 5 return stations from given station.
         """
-        sql = """SELECT s."Nimi", j."Return station id" AS return_station_id, s1."Nimi" AS return_station, count(j."Return station id")
+        sql = """SELECT s."Nimi", j."Return station id" AS return_station_id,
+            s1."Nimi" AS return_station, count(j."Return station id")
             FROM stations AS s
             JOIN journeys AS j ON s."ID"=j."Departure station id"
             JOIN stations AS s1 ON j."Return station id"=s1."ID"
@@ -97,7 +98,8 @@ class CityBikeRepository:
     def get_top_departure_stations(self, station_id):
         """Fetch top 5 departure stations to given station.
         """
-        sql = """SELECT s."Nimi", j."Departure station id" AS departure_station_id, s1."Nimi" AS departure_station, count(j."Departure station id")
+        sql = """SELECT s."Nimi", j."Departure station id" AS departure_station_id,
+            s1."Nimi" AS departure_station, count(j."Departure station id")
             FROM stations AS s
             JOIN journeys AS j ON s."ID"=j."Return station id"
             JOIN stations AS s1 ON j."Departure station id"=s1."ID"

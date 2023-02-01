@@ -3,7 +3,7 @@ import pandas as pd
 from .. import db
 
 dirname = os.path.dirname(__file__)
-data_file_path = os.path.join(dirname, "..", "..", "..", "data", 
+data_file_path = os.path.join(dirname, "..", "..", "..", "data",
     "Helsingin_ja_Espoon_kaupunkipyöräasemat_avoin.csv")
 
 def import_stations():

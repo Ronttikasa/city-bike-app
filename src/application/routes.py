@@ -18,14 +18,14 @@ def add_journeys():
 @app.route("/journeys", methods=["GET"])
 def journeys():
     page = int(request.args.get("page", 1))
-    journeys_to_show = 50
-    offset = (page - 1) * journeys_to_show
-    journeys = journey_service.get_journeys(journeys_to_show, offset)
-    return render_template("journeys.html", journeys=journeys, page=page)
+    show = 50
+    offset = (page - 1) * show
+    journeys_to_show = journey_service.get_journeys(show, offset)
+    return render_template("journeys.html", journeys=journeys_to_show, page=page)
 
-@app.route("/station/<int:id>", methods=["GET"])
-def station(id):
-    station = journey_service.get_station_data(id)
+@app.route("/station/<int:station_id>", methods=["GET"])
+def show_station(station_id):
+    station = journey_service.get_station_data(station_id)
     return render_template("station.html", **station)
 
 @app.route("/stations", methods=["GET"])
@@ -33,9 +33,9 @@ def stations():
     page = int(request.args.get("page", 1))
     show = 50
     offset = (page - 1) * show
-    stations = journey_service.get_stations(show, offset)
-    return render_template("stations.html", stations=stations, page=page)
+    stations_to_show = journey_service.get_stations(show, offset)
+    return render_template("stations.html", stations=stations_to_show, page=page)
 
 @app.route("/", methods=["GET"])
 def index():
-    return redirect("/stations")     
+    return redirect("/stations")

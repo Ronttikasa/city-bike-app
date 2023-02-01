@@ -1,14 +1,16 @@
 import os
 import pandas as pd
-from .. import db
 from ..repositories.city_bike_repository import citybike_repo
 
 class JourneyService:
+    """Application logic class that handles the front-end requests.
+    """
     def __init__(self, repository=citybike_repo):
         self.repo = repository
 
     def import_journeys(self, filename):
-        """Import journey data from csv file"""
+        """Import journey data from csv file to database
+        """
         dirname = os.path.dirname(__file__)
         data_file_path = os.path.join(dirname, "..", "..", "..", "data", filename)
         df = pd.read_csv(data_file_path)
@@ -55,7 +57,7 @@ class JourneyService:
         """Fetch station data.
 
         Returns:
-           Object with station data 
+           Object with station data
         """
 
         result = {}
