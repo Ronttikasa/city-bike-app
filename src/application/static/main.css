@@ -1,0 +1,26 @@
+body {
+    margin: auto;
+    max-width: 45em;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+nav ul {
+    padding: 0;
+    margin: 1em;
+    text-align: center;
+}
+
+
+nav li {
+    display: inline-block;
+    padding: .5em;
+    background: grey;
+    border-radius: .5em;
+    margin: .2em;
+}
+
+nav li a {
+    text-decoration: none;
+    color: #000;
+}
+
