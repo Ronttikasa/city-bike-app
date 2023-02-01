@@ -21,7 +21,8 @@ class CityBikeRepository:
         Returns:
             List of objects with fields Departure, Return, departure_station, return_station, Distance, Duration
         """
-        sql = """SELECT j."Departure", j."Return", s1."Nimi" AS "departure_station", 
+        sql = """SELECT j."Departure", j."Return", j."Departure station id" AS "departure_id",
+            s1."Nimi" AS "departure_station", j."Return station id" AS "return_id",
             s2."Nimi" AS "return_station", j."Distance", j."Duration"
             FROM journeys as j
             JOIN stations as s1 ON j."Departure station id"=s1."ID"
