@@ -2,10 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>City Bikes</title>
 </head>
 <body>
+    <nav>
+        <ul>
+          <li><a href="/stations">Stations</a></li>
+          <li><a href="/journeys">Journeys</a></li>
+        </ul>
+      </nav>
     {% block content %}{% endblock %}
 </body>
 </html>
