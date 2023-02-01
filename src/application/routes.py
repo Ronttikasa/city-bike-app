@@ -2,7 +2,6 @@ from flask import render_template, redirect, request
 from flask import current_app as app
 from .services.import_stations import import_stations
 from .services.journey_service import journey_service
-from .repositories.city_bike_repository import citybike_repo
 
 @app.route("/add-stations", methods=["GET"])
 def add_stations():
@@ -21,7 +20,7 @@ def journeys():
     page = int(request.args.get("page", 1))
     journeys_to_show = 50
     offset = (page - 1) * journeys_to_show
-    journeys = journey_service.show_journeys(journeys_to_show, offset)
+    journeys = journey_service.get_journeys(journeys_to_show, offset)
     return render_template("journeys.html", journeys=journeys, page=page)
 
 @app.route("/station/<int:id>", methods=["GET"])
@@ -31,8 +30,11 @@ def station(id):
 
 @app.route("/stations", methods=["GET"])
 def stations():
-    stations = citybike_repo.get_all_stations()
-    return render_template("index.html", stations=stations)
+    page = int(request.args.get("page", 1))
+    show = 50
+    offset = (page - 1) * show
+    stations = journey_service.get_stations(show, offset)
+    return render_template("stations.html", stations=stations, page=page)
 
 @app.route("/", methods=["GET"])
 def index():

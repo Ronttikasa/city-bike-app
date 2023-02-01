@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>City bike stations in Espoo and Helsinki</h1>
+    <p>
+        <table>
+        {% for station in stations %}
+        <tr>
+            <td><a href="/station/{{ station.ID }}">{{ station.Nimi }}</a></td>
+            <td>{{ station.Osoite }}, {{ station.Kaupunki }}</td>
+        </tr>
+        {% endfor %}
+        </table>
+    </p>
+    <p>
+        {% if page == 1 %}
+            1 <a href="/stations?page=2">next page</a>
+        {% elif stations|length < 50 %}
+            <a href="/stations?page={{ page - 1 }}">previous page</a> {{ page }}
+        {% else %}
+            <a href="/stations?page={{ page - 1 }}">previous page</a> {{ page }} <a href="/stations?page={{ page + 1 }}">next page</a>
+        {% endif %}
+    </p>
+{% endblock %}

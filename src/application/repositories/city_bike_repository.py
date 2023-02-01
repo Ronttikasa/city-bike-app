@@ -6,17 +6,28 @@ class CityBikeRepository:
     def __init__(self, database=db):
         self.db = database
 
-    def get_all_stations(self):
-        """Fetch all stations in database.
+    def get_stations(self, limit, offset):
+        """Fetch stations from database.
+
+        Args:
+            limit: Number of stations to get
+            offset: Offset from start of db table
 
         Returns:
             List of objects with fields FID, ID, Nimi, Osoite, Kaupunki
         """
-        sql = """SELECT "FID", "ID", "Nimi", "Osoite", "Kaupunki" FROM stations"""
-        return self.db.session.execute(sql).fetchall()
+        sql = """SELECT "FID", "ID", "Nimi", "Osoite", "Kaupunki" 
+            FROM stations
+            LIMIT :limit
+            OFFSET :offset"""
+        return self.db.session.execute(sql, {"limit": limit, "offset": offset}).fetchall()
 
     def get_journeys(self, limit, offset):
         """Fetch all journeys in database.
+
+        Args:
+            limit: Number of journeys to get
+            offset: Offset from start of db table
 
         Returns:
             List of objects with fields Departure, Return, departure_station, return_station, Distance, Duration

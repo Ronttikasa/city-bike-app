@@ -11,6 +11,8 @@
     <p>
     {% if page == 1 %}
         1 <a href="/journeys?page=2">next page</a>
+    {% elif journeys|length < 50 %}
+        <a href="/journeys?page={{ page - 1 }}">previous page</a> {{ page }}
     {% else %}
         <a href="/journeys?page={{ page - 1 }}">previous page</a> {{ page }} <a href="/journeys?page={{ page + 1 }}">next page</a>
     {% endif %}
