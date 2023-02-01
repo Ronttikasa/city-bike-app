@@ -22,12 +22,8 @@ class JourneyService:
             index_filter = df[(df["Distance"] < 10) | (df["Duration"] < 10)].index
             df.drop(index_filter, inplace=True)
 
-            df.to_sql(
-                "journeys",
-                db.engine,
-                index=False,
-                chunksize=10000,
-                if_exists="append")
+            self.repo.import_journeys(df)
+
             return True
         return False
 

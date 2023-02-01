@@ -6,6 +6,14 @@ class CityBikeRepository:
     def __init__(self, database=db):
         self.db = database
 
+    def import_journeys(self, dataframe):
+        dataframe.to_sql(
+            "journeys",
+            db.engine,
+            index=False,
+            chunksize=10000,
+            if_exists="append")
+
     def get_stations(self, limit, offset):
         """Fetch stations from database.
 
