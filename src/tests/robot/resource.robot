@@ -15,3 +15,6 @@ Open And Configure Browser
 
 Go To Home Page
     Go To  ${URL}
+
+Go To Journeys Page
+    Go To  ${URL}/journeys
