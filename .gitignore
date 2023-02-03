@@ -130,3 +130,8 @@ dmypy.json
 
 # OSX things
 .DS_Store
+
+# Robot Framework
+log.html
+output.xml
+report.html
