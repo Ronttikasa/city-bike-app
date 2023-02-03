@@ -7,12 +7,26 @@ class CityBikeRepository:
         self.db = database
 
     def import_journeys(self, dataframe):
+        """Import a pandas dataframe to the database.
+        """
         dataframe.to_sql(
             "journeys",
-            db.engine,
+            self.db.engine,
             index=False,
             chunksize=10000,
             if_exists="append")
+
+    def import_stations(self, dataframe):
+        """Import a pandas dataframe to the database
+        """
+        dataframe.to_sql(
+            "stations",
+            self.db.engine,
+            index=False,
+            if_exists="replace")
+
+        sql = """ ALTER TABLE stations ADD PRIMARY KEY ("FID") """
+        self.db.session.execute(sql)
 
     def get_stations(self, limit, offset):
         """Fetch stations from database.

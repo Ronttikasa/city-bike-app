@@ -1,11 +1,10 @@
 from flask import render_template, redirect, request
 from flask import current_app as app
-from .services.import_stations import import_stations
 from .services.journey_service import journey_service
 
 @app.route("/add-stations", methods=["GET"])
 def add_stations():
-    import_stations()
+    journey_service.import_stations()
     return redirect("/stations")
 
 @app.route("/add-journeys", methods=["GET"])

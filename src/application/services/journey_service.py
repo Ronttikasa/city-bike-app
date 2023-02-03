@@ -28,6 +28,11 @@ class JourneyService:
 
             return True
         return False
+    
+    def import_stations(self):
+        """Import station data from csv to database
+        """
+        self.repo.import_stations()
 
     def get_journeys(self, limit, offset):
         """Fetch journeys from database.
