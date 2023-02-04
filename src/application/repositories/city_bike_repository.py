@@ -1,3 +1,4 @@
+from sqlalchemy import inspect
 from .. import db
 
 class CityBikeRepository:
@@ -5,6 +6,19 @@ class CityBikeRepository:
 
     def __init__(self, database=db):
         self.db = database
+
+    def table_exists(self, table):
+        """Check if table exists in database.
+
+        Args:
+            table (str): table name
+
+        Returns:
+            bool
+        """
+        inspector = inspect(self.db.engine)
+        return inspector.has_table(table)
+
 
     def import_journeys(self, dataframe):
         """Import a pandas dataframe to the database.

@@ -2,17 +2,6 @@ from flask import render_template, redirect, request
 from flask import current_app as app
 from .services.journey_service import journey_service
 
-@app.route("/add-stations", methods=["GET"])
-def add_stations():
-    journey_service.import_stations()
-    return redirect("/stations")
-
-@app.route("/add-journeys", methods=["GET"])
-def add_journeys():
-    files = ["2021-05.csv", "2021-06.csv", "2021-07.csv"]
-    for file in files:
-        journey_service.import_journeys(file)
-    return redirect("/journeys")
 
 @app.route("/journeys", methods=["GET"])
 def journeys():
@@ -37,4 +26,7 @@ def stations():
 
 @app.route("/", methods=["GET"])
 def index():
+    journey_service.import_stations()
+    files = ["2021-05.csv", "2021-06.csv", "2021-07.csv"]
+    journey_service.import_journeys(files)
     return redirect("/stations")

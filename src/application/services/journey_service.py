@@ -8,31 +8,49 @@ class JourneyService:
     def __init__(self, repository=citybike_repo):
         self.repo = repository
 
-    def import_journeys(self, filename):
-        """Import journey data from csv file to database
+    def import_journeys(self, filenames):
+        """Import journey data from csv files to database
+
+        Args: list of filenames
+
+        Returns: bool
         """
-        dirname = os.path.dirname(__file__)
-        data_file_path = os.path.join(dirname, "..", "..", "..", "data", filename)
-        df = pd.read_csv(data_file_path)
+        if self.repo.table_exists("journeys"):
+            return False
 
-        if not df.empty:
-            df.rename(
-                columns={"Covered distance (m)": "Distance", "Duration (sec.)": "Duration"},
-                inplace=True)
-            df.drop(columns=["Departure station name", "Return station name"], inplace=True)
+        for filename in filenames:
+            dirname = os.path.dirname(__file__)
+            data_file_path = os.path.join(dirname, "..", "..", "..", "data", filename)
+            df = pd.read_csv(data_file_path)
 
-            index_filter = df[(df["Distance"] < 10) | (df["Duration"] < 10)].index
-            df.drop(index_filter, inplace=True)
+            if not df.empty:
+                df.rename(
+                    columns={"Covered distance (m)": "Distance", "Duration (sec.)": "Duration"},
+                    inplace=True)
+                df.drop(columns=["Departure station name", "Return station name"], inplace=True)
 
-            self.repo.import_journeys(df)
+                index_filter = df[(df["Distance"] < 10) | (df["Duration"] < 10)].index
+                df.drop(index_filter, inplace=True)
 
-            return True
-        return False
+                self.repo.import_journeys(df)
+        return True
     
     def import_stations(self):
         """Import station data from csv to database
         """
-        self.repo.import_stations()
+        if self.repo.table_exists("stations"):
+            return False
+
+        dirname = os.path.dirname(__file__)
+        data_file_path = os.path.join(dirname, "..", "..", "..", "data",
+        "Helsingin_ja_Espoon_kaupunkipyöräasemat_avoin.csv")
+
+        df = pd.read_csv(data_file_path)
+        df.loc[df["Kaupunki"] == " ", "Kaupunki"] = "Helsinki"
+
+        if not df.empty:
+            self.repo.import_stations(df)
+        return True
 
     def get_journeys(self, limit, offset):
         """Fetch journeys from database.
