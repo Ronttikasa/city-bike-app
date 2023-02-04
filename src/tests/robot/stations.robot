@@ -21,11 +21,10 @@ Go To Previous Page
     Click Link  previous page
     Page Should Contain  Hanasaari
 
-Go To Journeys
+Go To Journeys View
     Click Link  Journeys
     Page Should Contain  City bike journeys
 
-Go To Station
+Go To Station View
     Click Link  Westendinasema
     Page Should Contain  Departing journeys
-

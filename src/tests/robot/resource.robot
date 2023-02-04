@@ -18,3 +18,6 @@ Go To Home Page
 
 Go To Journeys Page
     Go To  ${URL}/journeys
+
+Go To Station Page
+    Go To  ${URL}/station/501
