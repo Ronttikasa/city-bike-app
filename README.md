@@ -19,8 +19,12 @@ Build and run the app with Docker:
 
 ### Importing the datasets
 
-The app is now running at http://localhost:5000. Import the data by [voisko tehdä nappulat etusivulle jos kanta tyhjä?]
+The app is now running at http://localhost:5000. The datasets are imported to the database automatically when the localhost address is visited for the first time. This will take a while as the datasets a quite large.
 
+### Running tests
+
+E2E tests are written using RobotFramework. To run the tests, make sure you have Chrome and [chromedriver](https://ohjelmistotuotanto-hy.github.io/chromedriver_asennusohjeet/) installed. Run E2E tests:
+```poetry run invoke robot```
 
 ### Other useful commands
 
@@ -33,6 +37,9 @@ python app:
 
 Access database:
 ```docker exec -it city-bike-app-db-1 psql -U postgres```
+
+Run pylint:
+```poetry run invoke lint```
 
 Stop and remove volumes
 ```docker-compose down -v```
