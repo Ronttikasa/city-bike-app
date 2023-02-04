@@ -34,7 +34,7 @@ class JourneyService:
 
                 self.repo.import_journeys(df)
         return True
-    
+
     def import_stations(self):
         """Import station data from csv to database
         """
