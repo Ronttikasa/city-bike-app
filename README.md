@@ -1,6 +1,6 @@
 # Helsinki City Bike App
 
-A pre-assignment for Solita Dev Academy, this app lets you view data about city bike stations and journeys in the Helsinki and Espoo area.
+A pre-assignment for Solita Dev Academy, this app lets you view data about city bike stations and journeys in the Helsinki and Espoo area. The technologies used are Python/Flask for the app and PostgreSQL for the database.
 
 ### Building and running the app:
 
@@ -16,7 +16,7 @@ Place them in the *data* directory at the root of the project.
 
 (The dataset file names should be 2021-05.csv, 2021-06.csv, 2021-07.csv, Helsingin_ja_Espoon_kaupunkipyöräasemat_avoin.csv, respectively. Rename the files if needed.)
 
-Build and run the app with Docker: ```docker-compose up```
+Build and run the app and start the database with Docker: ```docker-compose up```
 
 ### Importing the datasets
 
@@ -24,7 +24,9 @@ The app is now running at http://localhost:5000. The datasets are imported to th
 
 ### Running tests
 
-E2E tests are written using RobotFramework. To run the tests, make sure you have Chrome and [chromedriver](https://ohjelmistotuotanto-hy.github.io/chromedriver_asennusohjeet/) installed. Run E2E tests: ```poetry run invoke robot```
+Run unit tests: ```poetry run invoke test```
+
+E2E tests are written using RobotFramework. To run the tests, make sure you have Chrome and [chromedriver](https://ohjelmistotuotanto-hy.github.io/chromedriver_asennusohjeet/) installed. With the app running, run E2E tests in another terminal: ```poetry run invoke robot```
 
 ### Other useful commands
 
